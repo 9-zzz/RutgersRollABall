@@ -10,10 +10,24 @@ public class TimerThing : MonoBehaviour
     private int p2score;
     public bool timeRanOut = false;
 
+    public bool tenSecondsLeft = false;
+    public bool startedTimeFlash = false;
+
     // Use this for initialization
     void Start()
     {
 
+    }
+
+    IEnumerator FlashTimeRunningOut()
+    {
+        while (true)
+        {
+            Fader.S.some.CrossFadeAlpha(0.25f, 1.0f, true);
+            yield return new WaitForSeconds(1.0f);
+            Fader.S.some.CrossFadeAlpha(0.0f, 1.0f, true);
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     // Update is called once per frame
@@ -24,6 +38,13 @@ public class TimerThing : MonoBehaviour
         // Uggghhhh quick fix just because of the 1 player mode... maybe get rid of the one player mode...
         if (PlayerBallController2.S != null)
             p2score = PlayerBallController2.S.p2score;
+
+        if (timer < 10.0f && !startedTimeFlash)
+        {
+            tenSecondsLeft = true;
+            StartCoroutine(FlashTimeRunningOut());
+            startedTimeFlash = true;
+        }
 
         if (timer > 0.0f)
             timer -= Time.deltaTime;
@@ -50,10 +71,11 @@ public class TimerThing : MonoBehaviour
         else
         {
             Debug.Log("DRAW");
+            GameController.S.draws++;
         }
 
+        Debug.Log("Game over Time ran out, restarting in 3 seconds.");
         yield return new WaitForSeconds(3.0f);
-        Debug.Log("Game over Time ran out");
         Application.LoadLevel(Application.loadedLevel);
     }
 

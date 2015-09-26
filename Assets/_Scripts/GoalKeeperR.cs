@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class GoalKeeperL : MonoBehaviour
+public class GoalKeeperR : MonoBehaviour
 {
 
     // Use this for initialization
@@ -20,7 +20,8 @@ public class GoalKeeperL : MonoBehaviour
     {
         if (col.CompareTag("playball"))
         {
-            Debug.Log("Left goal so blue wins.");
+            Debug.Log("Rightt goal so red wins.");
+            GameController.S.redScoredGoal = true;
             this.GetComponent<GoalRainbow>().enabled = true;
         }
     }

@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class Fader : MonoBehaviour
+public class Fader1 : MonoBehaviour
 {
-    public static Fader S;
+    public static Fader1 S;
     public Image some;
 
     void Awake()
@@ -16,8 +16,8 @@ public class Fader : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        some.color = Color.red;
-        some.CrossFadeAlpha(0, 2, true);
+        some.color = Color.white;
+        some.CrossFadeAlpha(0, 0, true);
     }
 
     // Update is called once per frame

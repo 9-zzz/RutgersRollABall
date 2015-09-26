@@ -19,7 +19,10 @@ public class GameMode1Text : MonoBehaviour
     void Update()
     {
         if (wonGameMode1 && Input.GetKey(KeyCode.T))
+        {
+            GameController.S.GetComponent<GameController>().enabled = true;
             Application.LoadLevel(2);
+        }
 
         localScore = PlayerBallController1.S.p1score;
 
